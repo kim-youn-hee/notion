@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAeDA Notion LaTeX Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px auto;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px; /* 제목과 입력 필드 사이 간격 */
+    }
+    label {
+      display: block;
+      margin-bottom: 10px; /* 제목과 필드 사이 간격 */
+      font-size: 18px; /* 제목 크기 통일 */
+      font-weight: bold;
+    }
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type="color"] {
+      width: 50px;
+      height: 40px;
+      border: none;
+      cursor: pointer;
+      vertical-align: middle;
+    }
+    .color-group {
+      display: flex;
+      align-items: center;
+    }
+    .color-group div {
+      display: flex;
+      align-items: center;
+      margin-right: 30px; /* 컬러박스 간 간격 설정 */
+    }
+    .color-group label {
+      margin-right: 10px; /* 컬러박스와 텍스트 사이 간격 */
+    }
+    #preview-title {
+      font-size: 18px; /* 미리보기 제목 크기 통일 */
+      font-weight: bold; /* 굵게 설정 */
+    }
+    #preview {
+      padding: 10px;
+      margin-top: 15px; /* 미리보기와 제목 사이 간격 조정 */
+      border: 1px solid #ccc;
+      background-color: #f9f9f9; /* 기본 배경 */
+      text-align: center;
+      min-height: 30px; /* 최소 높이 */
+      line-height: normal; /* 줄 간격 */
+      word-wrap: break-word; /* 단어 줄 바꿈 */
+    }
+    textarea {
+      resize: none; /* 크기 조정 금지 */
+      height: 50px; /* 높이 설정 */
+    }
+    .footer {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .footer a {
+      text-decoration: none; /* 밑줄 제거 */
+      color: blue; /* 링크 색상 */
+      font-weight: bold; /* 굵게 */
+    }
+  </style>
+</head>
+<body>
+  <h1>NAeDA Notion LaTeX Generator</h1>
+
+  <!-- 작성할 내용 -->
+  <div class="form-group">
+    <label>작성할 내용</label>
+    <input type="text" id="textInput" placeholder="텍스트 입력">
+  </div>
+
+  <!-- 글자색과 글자 배경색 -->
+<div class="form-group color-group">
+    <div>
+        <label for="textColorPicker">글자색</label>
+        <input type="color" id="textColorPicker" value="#000000">
+    </div>
+    <div>
+        <label for="bgColorPicker">글자 배경색</label>
+        <input type="color" id="bgColorPicker" value="#ffffff">
+    </div>
+</div>
+
+<!-- 글꼴 -->
+<div class="form-group">
+    <label>글꼴</label>
+    <select id="fontSelect">
+        <option value="\rm">Serif</option>
+        <option value="\sf">Sans Serif</option>
+        <option value="\tt">Monospace</option>
+    </select>
+</div>
+
+<!-- 글자 스타일 -->
+<div class="form-group">
+    <label>글자 스타일</label>
+    <select id="fontStyleSelect">
+        <option value="">Normal</option>
+        <option value="\textit">Italic</option>
+        <option value="\textbf">Bold</option>
+        <option value="\textbf \textit">Bold + Italic</option>
+    </select>
+</div>
+
+<!-- 글자 크기 -->
+<div class="form-group">
+    <label>글자 크기</label>
+    <select id="fontSizeSelect">
+        <option value="\tiny" selected>아주작게 (Tiny)</option> <!-- 기본값 설정 -->
+        <option value="\small">작게 (Small)</option>
+        <option value="\normalsize">보통 (Normal)</option>
+        <option value="\large">크게 (Large)</option>
+        <option value="\Huge">아주 크게 (Huge)</option>
+    </select>
+</div>
+
+<!-- 미리보기 -->
+<div class="form-group">
+     <label id="preview-title">미리보기</label><div id='preview'>미리보기 텍스트</div></div>
+
+<!-- 결과값 -->
+<div class='form-group'><label>결과값</label><textarea id='resultEquation'readonly></textarea><button onclick='copyToClipboard()'>복사하기</button></div>
+
+<!-- 하단 링크 -->
+<div class='footer'><a href='https://www.instagram.com/naeda_notion/'>내다 노션</a></footer>
+
+<script src='script.js'></script></body></html>
